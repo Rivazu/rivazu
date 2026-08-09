@@ -21,3 +21,20 @@ main {
 .timeline-content {
     white-space: pre-line;
 }
+
+.projects ul {
+    list-style: none;
+    padding: 0;
+}
+
+.projects li {
+    margin-bottom: 1.5rem;
+}
+
+.projects li p {
+    margin: 0.25rem 0 0;
+}
+
+.projects links {
+    font-size: 0.9rem;
+}

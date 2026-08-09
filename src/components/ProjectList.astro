@@ -1,0 +1,31 @@
+---
+import { projects } from "../data/projects";
+---
+
+<section class="projects">
+    <ul>
+     {
+        projects.map((project) => (
+            <li>
+                <strong>{project.name}</strong>
+                <p>{project.description}</p>
+                {
+                    project.links && (
+                            <p class="project-links">
+                                {project.links.map ((link, i) =>(
+                                    <>
+                                        {i > 0 && " . "}
+                                        <a href={link.href} target="_blank" rel="noopener noreferrer">
+                                        {link.label}
+                                    </a>
+                                </>
+                            ))}
+                            </p>
+                        <p>{project.tech_stack?.join(" - ")}</p>
+                    )
+                }
+            </li>
+        ))
+     }
+    </ul>
+</section>
