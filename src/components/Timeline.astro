@@ -23,7 +23,7 @@ function formatRange(start_date: number, end_date: number | null ) {
                     <div class="timeline-content">
                         <strong>{entry.job_title}</strong>
                         {entry.org && <span> @ {entry.org}</span>}
-                        <p>{entry.body}</p>
+                        <p set:html={entry.body} />
                     </div>
                 </li>
             ))

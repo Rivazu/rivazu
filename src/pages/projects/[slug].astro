@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { projects } from "../../data/projects";
+
+export function getStaticPaths() {
+    return projects.map((project) => ({
+        params: { slug: project.slug },
+        props: { project },
+    }));
+}
+
+const { project } = Astro.props;
+
+function formatRange(start_date: number, end_date: number | null | undefined) {
+    return end_date ? `${start_date} - ${end_date}` : `${start_date} - `;
+}
+---
+
+<BaseLayout title={`${project.name} — Rivazu`}>
+	<main>
+		<a class="back-link" href="/projects">← Projects</a>
+		<h1>{project.name}</h1>
+		<p class="tagline">{project.tagline}</p>
+		<p class="meta">{formatRange(project.start_date, project.end_date)}</p>
+		<p class="project-body">{project.description}</p>
+		{
+			project.links && project.links.length > 0 && (
+				<p class="project-links">
+					{project.links.map((link, i) => (
+						<>
+							{i > 0 && " · "}
+							<a href={link.href} target="_blank" rel="noopener noreferrer">
+								{link.label}
+							</a>
+						</>
+					))}
+				</p>
+			)
+		}
+		{
+			project.tech_stack && project.tech_stack.length > 0 && (
+				<p class="tech-stack">{project.tech_stack.join(" · ")}</p>
+			)
+		}
+		{
+			project.image && (
+				<img
+					class="project-image"
+					src={project.image}
+					alt={`${project.name} screenshot`}
+					loading="lazy"
+				/>
+			)
+		}
+	</main>
+</BaseLayout>
